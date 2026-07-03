@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para el amor de mi vida ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4d6d;
+            --secondary-color: #ff758f;
+            --overlay-color: rgba(255, 240, 243, 0.85);
+            --text-color: #590d22;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            
+            /* INTEGRACIÓN DE TU IMAGEN */
+            background-image: url('20260410_183257.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* Capa de desenfoque para que la imagen de fondo no distraiga del texto */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2); /* Oscurece un poco la foto original */
+            z-index: -2;
+        }
+
+        /* Corazones flotantes de fondo */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .heart-bg {
+            position: absolute;
+            color: white;
+            opacity: 0.6;
+            animation: float 6s infinite linear;
+            text-shadow: 0 0 5px rgba(255, 77, 109, 0.5);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Contenedor de la carta */
+        .card {
+            background: var(--overlay-color);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 85%;
+            text-align: center;
+            position: relative;
+            border: 3px solid white;
+            backdrop-filter: blur(10px); /* Efecto cristalino */
+            transition: transform 0.3s ease;
+            margin: 20px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            margin-top: 0;
+        }
+
+        .message {
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-top: 15px;
+        }
+
+        .question {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 20px 0;
+            display: block;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px;
+            align-items: center;
+            position: relative;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #btn-si {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        #btn-si:hover {
+            background: #ff0a54;
+            transform: scale(1.1);
+        }
+
+        #btn-no {
+            background: #6c757d;
+            color: white;
+            position: absolute;
+        }
+
+        /* Modal de éxito */
+        #success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(89, 13, 34, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-content h2 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary-color);
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            margin: 20px 0;
+        }
+
+        .close-modal {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts" id="hearts-container"></div>
+
+    <div class="card">
+        <h1>Para mi niña hermosa ❤️</h1>
+        <div class="message">
+            <p>
+                Desde que llegaste a mi vida, todo ha cobrado un sentido diferente. Eres la luz de mis ojos y la razón de cada una de mis sonrisas. Cada momento a tu lado es un tesoro que guardo con todo mi amor en el corazón. 
+            </p>
+            <p>
+                Gracias por ser mi alegría, mi gran amor y mi cómplice en cada aventura. No me imagino un futuro sin ti, porque contigo lo tengo todo. Te amo con toda mi alma.
+            </p>
+            <div class="signature">Con todo mi amor,<br>Tu papi rico ⚡</div>
+        </div>
+
+        <span class="question">¿Quieres ser mi novia?</span>
+
+        <div class="btn-container">
+            <button class="btn" id="btn-si">¡SÍ! ❤️</button>
+            <button class="btn" id="btn-no">No</button>
+        </div>
+    </div>
+
+    <div id="success-modal">
+        <div class="modal-content">
+            <h2>¡SÍIIII! ❤️</h2>
+            <p>¡Me haces el hombre más feliz del mundo! Prometo cuidarte y amarte cada día de mi vida. 😍✨</p>
+            <button class="close-modal" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        // Crear corazones flotantes
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartIcons = ['❤️', '💖', '💗', '💓', '💕', '✨'];
+            
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-bg';
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const modal = document.getElementById('success-modal');
+
+        // Lógica del botón "No" que escapa
+        btnNo.addEventListener('mouseover', function() {
+            const newTop = Math.random() * (window.innerHeight - 50);
+            const newLeft = Math.random() * (window.innerWidth - 100);
+
+            btnNo.style.position = 'fixed';
+            btnNo.style.top = newTop + 'px';
+            btnNo.style.left = newLeft + 'px';
+            btnNo.style.zIndex = '1000';
+        });
+
+        // Por si acaso logra hacerle click al No
+        btnNo.addEventListener('click', function() {
+            const newTop = Math.random() * (window.innerHeight - 50);
+            const newLeft = Math.random() * (window.innerWidth - 100);
+            btnNo.style.top = newTop + 'px';
+            btnNo.style.left = newLeft + 'px';
+        });
+
+        // Lógica del botón "Sí"
+        btnSi.addEventListener('click', function() {
+            modal.style.display = 'flex';
+            for(let i=0; i<60; i++) {
+                setTimeout(createHeartAtClick, i * 40);
+            }
+        });
+
+        function createHeartAtClick() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = '50%';
+            heart.style.top = '50%';
+            heart.style.fontSize = '25px';
+            heart.style.transition = 'all 1.2s ease-out';
+            heart.style.zIndex = '1000';
+            document.body.appendChild(heart);
+
+            const destinationX = (Math.random() - 0.5) * 1200;
+            const destinationY = (Math.random() - 0.5) * 1200;
+
+            setTimeout(() => {
+                heart.style.transform = `translate(${destinationX}px, ${destinationY}px) scale(0) rotate(${Math.random() * 360}deg)`;
+                heart.style.opacity = '0';
+            }, 50);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 1200);
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
